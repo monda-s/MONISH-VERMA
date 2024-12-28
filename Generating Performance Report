@@ -1,0 +1,20 @@
+def performance_report():
+    try:
+        conn = sqlite3.connect("student_management.db")
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT students.name, performance.subject, AVG(performance.marks) AS avg_marks
+            FROM students
+            JOIN performance ON students.student_id = performance.student_id
+            GROUP BY students.name, performance.subject
+        """)
+        report = cursor.fetchall()
+        print("Performance Report:")
+        for row in report:
+            print(f"Student: {row[0]}, Subject: {row[1]}, Average Marks: {row[2]}")
+    except Exception as e:
+        print(f"Performance Report: FAIL - {e}")
+    finally:
+        conn.close()
+
+performance_report()
