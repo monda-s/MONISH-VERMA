@@ -1,0 +1,185 @@
+import sqlite3
+
+# Database setup
+def setup_database():
+    conn = sqlite3.connect("student_management.db")
+    cursor = conn.cursor()
+
+    # Create students table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS students (
+            student_id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            class TEXT NOT NULL,
+            age INTEGER NOT NULL
+        )
+    """)
+
+    # Create attendance table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS attendance (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            student_id INTEGER NOT NULL,
+            date TEXT NOT NULL,
+            status TEXT NOT NULL,
+            FOREIGN KEY (student_id) REFERENCES students(student_id)
+        )
+    """)
+
+    # Create performance table
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS performance (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            student_id INTEGER NOT NULL,
+            subject TEXT NOT NULL,
+            marks INTEGER NOT NULL,
+            FOREIGN KEY (student_id) REFERENCES students(student_id)
+        )
+    """)
+    conn.commit()
+    conn.close()
+
+# Add a new student
+def add_student(student_id, name, student_class, age):
+    try:
+        conn = sqlite3.connect("student_management.db")
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO students (student_id, name, class, age) VALUES (?, ?, ?, ?)", 
+                       (student_id, name, student_class, age))
+        conn.commit()
+        print("Student added successfully.")
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        conn.close()
+
+# Mark attendance
+def mark_attendance(student_id, date, status):
+    try:
+        conn = sqlite3.connect("student_management.db")
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO attendance (student_id, date, status) VALUES (?, ?, ?)", 
+                       (student_id, date, status))
+        conn.commit()
+        print("Attendance marked successfully.")
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        conn.close()
+
+# Add performance
+def add_performance(student_id, subject, marks):
+    try:
+        conn = sqlite3.connect("student_management.db")
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO performance (student_id, subject, marks) VALUES (?, ?, ?)", 
+                       (student_id, subject, marks))
+        conn.commit()
+        print("Performance added successfully.")
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        conn.close()
+
+# Fetch student data
+def fetch_students():
+    try:
+        conn = sqlite3.connect("student_management.db")
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM students")
+        students = cursor.fetchall()
+        print("Student Records:")
+        for student in students:
+            print(f"ID: {student[0]}, Name: {student[1]}, Class: {student[2]}, Age: {student[3]}")
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        conn.close()
+
+# Generate attendance report
+def attendance_report():
+    try:
+        conn = sqlite3.connect("student_management.db")
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT students.name, COUNT(attendance.status) AS total_present
+            FROM students
+            JOIN attendance ON students.student_id = attendance.student_id
+            WHERE attendance.status = 'Present'
+            GROUP BY students.name
+        """)
+        report = cursor.fetchall()
+        print("Attendance Report:")
+        for record in report:
+            print(f"Student: {record[0]}, Days Present: {record[1]}")
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        conn.close()
+
+# Generate performance report
+def performance_report():
+    try:
+        conn = sqlite3.connect("student_management.db")
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT students.name, performance.subject, AVG(performance.marks) AS avg_marks
+            FROM students
+            JOIN performance ON students.student_id = performance.student_id
+            GROUP BY students.name, performance.subject
+        """)
+        report = cursor.fetchall()
+        print("Performance Report:")
+        for record in report:
+            print(f"Student: {record[0]}, Subject: {record[1]}, Average Marks: {record[2]}")
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        conn.close()
+
+# Main function to run the project
+def main():
+    setup_database()
+
+    print("Welcome to Student Management System")
+    while True:
+        print("\nMenu:")
+        print("1. Add Student")
+        print("2. Mark Attendance")
+        print("3. Add Performance")
+        print("4. Fetch Students")
+        print("5. Attendance Report")
+        print("6. Performance Report")
+        print("7. Exit")
+
+        choice = input("Enter your choice: ")
+        if choice == '1':
+            student_id = int(input("Enter Student ID: "))
+            name = input("Enter Student Name: ")
+            student_class = input("Enter Student Class: ")
+            age = int(input("Enter Student Age: "))
+            add_student(student_id, name, student_class, age)
+        elif choice == '2':
+            student_id = int(input("Enter Student ID: "))
+            date = input("Enter Date (YYYY-MM-DD): ")
+            status = input("Enter Status (Present/Absent): ")
+            mark_attendance(student_id, date, status)
+        elif choice == '3':
+            student_id = int(input("Enter Student ID: "))
+            subject = input("Enter Subject: ")
+            marks = int(input("Enter Marks: "))
+            add_performance(student_id, subject, marks)
+        elif choice == '4':
+            fetch_students()
+        elif choice == '5':
+            attendance_report()
+        elif choice == '6':
+            performance_report()
+        elif choice == '7':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Try again.")
+
+if __name__ == "__main__":
+    main()
