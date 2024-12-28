@@ -30,3 +30,27 @@ The Student Management System is a Python-based project that simplifies the mana
 2. **SQLite**: A lightweight and reliable database for storing and managing student records.
 
 3. **CLI (Command Line Interface)**: The application uses a text-based user interface for easy interaction.
+
+---
+## **Installation**
+1. **Clone this repository to your local machine:**
+git clone https://github.com/your-username/student-management-system.git
+2. **Navigate to the project directory:**
+cd student-management-system
+
+3. **Install the required dependencies:**
+pip install -r requirements.txt
+4. **Run the application:**
+python student_management_system.py
+
+---
+
+## **Usage**
+1. **Start the Application:** Run the main script to access the system menu.
+2. **Choose from Options:** Use the numbered menu options to add, update, delete, or retrieve student records.
+3. **Reports:** Generate attendance and performance reports with the respective options.
+4. **Exit:** Choose the exit option to safely close the application.
+
+---
+
+## **Contribution**
