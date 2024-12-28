@@ -1,0 +1,21 @@
+def attendance_report():
+    try:
+        conn = sqlite3.connect("student_management.db")
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT students.name, COUNT(attendance.status) AS present_days
+            FROM students
+            JOIN attendance ON students.student_id = attendance.student_id
+            WHERE attendance.status = 'Present'
+            GROUP BY students.name
+        """)
+        report = cursor.fetchall()
+        print("Attendance Report:")
+        for row in report:
+            print(f"Student: {row[0]}, Present Days: {row[1]}")
+    except Exception as e:
+        print(f"Attendance Report: FAIL - {e}")
+    finally:
+        conn.close()
+
+attendance_report()
