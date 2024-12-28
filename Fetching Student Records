@@ -1,0 +1,19 @@
+def test_fetch_students():
+    try:
+        conn = sqlite3.connect("student_management.db")
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM students")
+        records = cursor.fetchall()
+        if records:
+            print("Fetch students: PASS")
+            print("Student Records:")
+            for record in records:
+                print(f"ID: {record[0]}, Name: {record[1]}, Class: {record[2]}, Age: {record[3]}")
+        else:
+            print("Fetch students: PASS (No records found)")
+    except Exception as e:
+        print(f"Fetch students: FAIL - {e}")
+    finally:
+        conn.close()
+
+test_fetch_students()
