@@ -1,0 +1,15 @@
+def test_add_student():
+    try:
+        conn = sqlite3.connect("student_management.db")
+        cursor = conn.cursor()
+        query = "INSERT INTO students (student_id, name, class, age) VALUES (?, ?, ?, ?)"
+        data = (101, "Alice Johnson", "10th", 15)
+        cursor.execute(query, data)
+        conn.commit()
+        print("Add student: PASS")
+    except Exception as e:
+        print(f"Add student: FAIL - {e}")
+    finally:
+        conn.close()
+
+test_add_student()
