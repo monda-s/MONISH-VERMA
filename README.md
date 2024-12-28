@@ -24,9 +24,9 @@ The Student Management System is a Python-based project that simplifies the mana
 5. **User-Friendly Interface**: A console-based menu system for easy navigation and interaction.  
 
 ---
-##**Technologies Used**
-**Python**: The main programming language for developing the application.
+## **Technologies Used**
+1. **Python**: The main programming language for developing the application.
 
-**SQLite**: A lightweight and reliable database for storing and managing student records.
+2. **SQLite**: A lightweight and reliable database for storing and managing student records.
 
-**CLI (Command Line Interface)**: The application uses a text-based user interface for easy interaction.
+3. **CLI (Command Line Interface)**: The application uses a text-based user interface for easy interaction.
