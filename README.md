@@ -14,7 +14,7 @@ The Student Management System is a Python-based project that simplifies the mana
 
 ---
 
-### **Introduction**  
+## **Introduction**  
 
 Created by **Monish, Yash, and Ansar**, this project is a Computer Science endeavor designed to enhance learning and showcase our programming skills. The **Student Management System** leverages Python and SQLite to provide an efficient platform for managing student data, including:  
 
