@@ -34,7 +34,7 @@ The Student Management System is a Python-based project that simplifies the mana
 ---
 ## **Installation**
 1. **Clone this repository to your local machine:**
-git clone https://github.com/your-username/student-management-system.git
+git clone https://github.com/monda-s/MONISH-VERMA.git
 2. **Navigate to the project directory:**
 cd student-management-system
 
