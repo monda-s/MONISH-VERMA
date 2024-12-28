@@ -1,0 +1,11 @@
+import sqlite3
+
+def test_database_connection():
+    try:
+        conn = sqlite3.connect("student_management.db")
+        print("Database connection: PASS")
+        conn.close()
+    except Exception as e:
+        print(f"Database connection: FAIL - {e}")
+
+test_database_connection()
