@@ -1,0 +1,15 @@
+def test_add_performance():
+    try:
+        conn = sqlite3.connect("student_management.db")
+        cursor = conn.cursor()
+        query = "INSERT INTO performance (student_id, subject, marks) VALUES (?, ?, ?)"
+        data = (101, "Math", 95)
+        cursor.execute(query, data)
+        conn.commit()
+        print("Add performance: PASS")
+    except Exception as e:
+        print(f"Add performance: FAIL - {e}")
+    finally:
+        conn.close()
+
+test_add_performance()
