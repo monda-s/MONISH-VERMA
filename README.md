@@ -44,13 +44,15 @@ This project serves as a practical tool for institutions and a comprehensive pro
 ---
 ## **Installation**
 1. **Clone this repository to your local machine:**
-git clone https://github.com/monda-s/MONISH-VERMA.git
-2. **Navigate to the project directory:**
+   ```bash
+   git clone https://github.com/monda-s/MONISH-VERMA.git
+   ```
+3. **Navigate to the project directory:**
 cd student-management-system
 
-3. **Install the required dependencies:**
+4. **Install the required dependencies:**
 pip install -r requirements.txt
-4. **Run the application:**
+5. **Run the application:**
 python student_management_system.py
 
 ---
