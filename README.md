@@ -10,8 +10,7 @@ The Student Management System is a Python-based project that simplifies the mana
 3. [Technologies Used](#technologies-used)  
 4. [Installation](#installation)  
 5. [Usage](#usage)  
-6. [Contributing](#contributing)  
-7. [License](#license)  
+6. [Disclaimer](#disclaimer)   
 
 ---
 
@@ -64,4 +63,5 @@ python student_management_system.py
 
 ---
 
-## **Contribution**
+## **Disclaimer**
+This project, Student Management System, is developed for educational purposes only. It is intended to demonstrate programming concepts and database integration using Python and SQLite. The system is not designed for production use in real-world environments. The authors, Monish, Yash, and Ansar, are not responsible for any misuse or issues arising from the use of this code.
